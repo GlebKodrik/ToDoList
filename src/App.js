@@ -8,9 +8,14 @@ const App = () => {
     const [todos, setTodoList] = useState([]);
     const [todoTitle, setTodoTitle] = useState("");
     const [error, setError] = useState("");
+
+    const todo = [...todos].reverse();
+
     useEffect(() => {
         const item = localStorage.getItem('todos') || [];
-        setTodoList(JSON.parse(item));
+        if(item.length !== 0){
+            setTodoList(JSON.parse(item));
+        }
     }, []);
 
     useEffect(() => {
@@ -28,8 +33,7 @@ const App = () => {
         };
         return date.toLocaleString("ru", options);
     }
-
-    const addTodo = (e) => {
+    const addTodo = () => {
         if (todoTitle !== '') {
             setError("");
             setTodoList([
@@ -58,6 +62,7 @@ const App = () => {
             return t;
         }))
     }
+
     return (
         <Context.Provider value={{
             removeTodo, toggleTodo
@@ -77,7 +82,7 @@ const App = () => {
                         Добавить
                     </Button>
                 </div>
-                <TodoList todos={todos}/>
+                <TodoList todos={todo}/>
             </div>
         </Context.Provider>
     )
