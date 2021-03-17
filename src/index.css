@@ -30,4 +30,9 @@ body {
 .todo i {
   z-index: 2;
 }
+[type="checkbox"]+span:not(.lever){
+  word-wrap: break-word;
+  height: 100%;
+  max-width: 90%;
+}
 

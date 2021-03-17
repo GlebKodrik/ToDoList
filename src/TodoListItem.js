@@ -1,20 +1,26 @@
-import React, {useState} from 'react'
+import React, {useContext} from 'react'
+import s from './TodoList.module.css'
+import {Context} from './context';
 
 export const TodoListItem = (props) => {
-    const [checked , setChecked] = useState(props.completed);
+    const {removeTodo, toggleTodo} = useContext(Context);
     const cln = ['todo'];
-    if(checked){
+    if(props.completed){
         cln.push('completed');
     }
     return (
         <li className={cln.join(' ')}>
             <label>
                 <input type="checkbox"
-                       checked={checked}
-                       onChange={() => setChecked(!checked)}
+                       checked={props.completed}
+                       onChange={() => toggleTodo(props.id)}
                 />
                 <span>{props.title}</span>
-                <i className="material-icons red-text">delete_forever</i>
+                <div className={s.dateDeleteWrap}>
+                    <span>{props.date}</span>
+                    <i className="material-icons red-text" onClick={() => removeTodo(props.id)}>delete_forever</i>
+                </div>
+
             </label>
         </li>
     )
