@@ -8,6 +8,10 @@ body {
 .todo {
   margin-bottom: 1rem;
 }
+.error{
+  color: red;
+  font-size: 24px;
+}
 
 .todo.completed span {
   text-decoration: line-through;
